@@ -24,15 +24,15 @@ public class FireBaseAdmin {
     private FirebaseAuth mAuth;
     public FireBaseAdminListener listener;
     public FirebaseUser user;
-   // FirebaseDatabase database;
-   // DatabaseReference myRefRaiz;
+    FirebaseDatabase database;
+    DatabaseReference myRefRaiz;
 
 
 //Constructor
     public FireBaseAdmin(){
         mAuth = FirebaseAuth.getInstance();
-       // database = FirebaseDatabase.getInstance();
-       // myRefRaiz = database.getReference();
+        database = FirebaseDatabase.getInstance();
+        myRefRaiz = database.getReference();
     }
     public void setListener(FireBaseAdminListener listener) {
         this.listener = listener;
