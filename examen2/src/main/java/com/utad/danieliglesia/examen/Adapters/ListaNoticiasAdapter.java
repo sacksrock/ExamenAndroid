@@ -23,8 +23,8 @@ public class ListaNoticiasAdapter extends RecyclerView.Adapter<NoticiasViewHolde
     private ArrayList<FBNoticias> noticias;
     private Context nContext;
     //constructor con parametros
-    public ListaNoticiasAdapter(ArrayList<FBNoticias> coches,Context nContext){
-        this.noticias = coches;
+    public ListaNoticiasAdapter(ArrayList<FBNoticias> noticias,Context nContext){
+        this.noticias = noticias;
         this.nContext = nContext;
     }
 
@@ -39,8 +39,8 @@ public class ListaNoticiasAdapter extends RecyclerView.Adapter<NoticiasViewHolde
     @Override
     //se relaciona los txtviews del xml con los atributos  del objeto
     public void onBindViewHolder(NoticiasViewHolder holder, int position) {
-        holder.tvtitulo.setText(noticias.get(position).Titulo);
-        holder.tvcuerpo.setText(noticias.get(position).Cuerpo);
+        holder.tvtitulo.setText(noticias.get(position).titulo);
+        holder.tvcuerpo.setText(noticias.get(position).cuerpo);
 
         Glide.with(nContext).load(noticias.get(position).imgurl).into(holder.imgnoticias);
 

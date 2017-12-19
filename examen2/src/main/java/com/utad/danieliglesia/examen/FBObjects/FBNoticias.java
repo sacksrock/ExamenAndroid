@@ -10,8 +10,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
 //cracion del objeto noticias y atributos
 public class FBNoticias {
 
-    public String Titulo;
-    public String Cuerpo;
+    public String titulo;
+    public String cuerpo;
     public String imgurl;
 
     public FBNoticias(){
@@ -19,8 +19,8 @@ public class FBNoticias {
     }
 
     public FBNoticias(String titulo, String cuerpo, String imgurl) {
-        this.Titulo = titulo;
-        this.Cuerpo = cuerpo;
+        this.titulo = titulo;
+        this.cuerpo = cuerpo;
         this.imgurl = imgurl;
     }
 }
