@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.utad.danieliglesia.examen.Second">
+
     <fragment
     android:id="@+id/fragmentListaNoticias"
     android:name="com.example.milib.ListaFragment"
