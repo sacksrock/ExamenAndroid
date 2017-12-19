@@ -28,17 +28,19 @@ public class FireBaseAdmin {
     DatabaseReference myRefRaiz;
 
 
-//Constructor
-    public FireBaseAdmin(){
+    //Constructor
+    public FireBaseAdmin() {
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRefRaiz = database.getReference();
     }
+
     public void setListener(FireBaseAdminListener listener) {
         this.listener = listener;
     }
-//Creamos el metodo para registrar en la base de datos con email y contraseña
-    public void registerConEmailYPassword(String email, String pass, Activity activity){
+
+    //Creamos el metodo para registrar en la base de datos con email y contraseña
+    public void registerConEmailYPassword(String email, String pass, Activity activity) {
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -50,18 +52,18 @@ public class FireBaseAdmin {
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
                             user = FirebaseAuth.getInstance().getCurrentUser();
-                            listener.FireBaseAdmin_RegisterOk(true);
-                        }
-                        else{
-                            listener.FireBaseAdmin_RegisterOk(false);
+                            listener.RegisterOk(true);
+                        } else {
+                            listener.RegisterOk(false);
                         }
 
                         // ...
                     }
                 });
     }
+
     //Creamos el metodo para loguearse en firebase con email y contraseña
-    public void loginConEmailYPassword(String email, String pass, Activity activity){
+    public void loginConEmailYPassword(String email, String pass, Activity activity) {
         mAuth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -73,14 +75,34 @@ public class FireBaseAdmin {
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
                             user = FirebaseAuth.getInstance().getCurrentUser();
-                            listener.FireBaseAdmin_LoginOk(true);
-                        }
-                        else{
-                            listener.FireBaseAdmin_LoginOk(false);
+                            listener.LoginOk(true);
+                        } else {
+                            listener.LoginOk(false);
                         }
 
                         // ...
                     }
                 });
+    }
+
+    public void Rama(final String rama) {
+        DatabaseReference refRama = myRefRaiz.child(rama);
+        refRama.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                listener.Rama(rama, dataSnapshot);
+                //.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                listener.Rama(rama, null);
+
+                // Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
 }

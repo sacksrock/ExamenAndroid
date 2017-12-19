@@ -1,5 +1,6 @@
 package com.utad.danieliglesia.examen;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import com.example.milib.LoginFragment;
 import com.example.milib.LoginFragmentListener;
 import com.example.milib.RegisterFragment;
 import com.example.milib.RegisterFragmentListener;
+import com.google.firebase.database.DataSnapshot;
 
 public class MainActivity extends AppCompatActivity {
     LoginFragment loginFragment;
@@ -17,13 +19,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Inicializamo el fragment del Login y del registro
+        //Asociamos el fragment del Login y del registro a variables
         loginFragment = (LoginFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentLogin);
         registerFragment = (RegisterFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentRegister);
 
         MainActivityEvents mainActivityEvents = new MainActivityEvents(this);
 
-        //Añadimos los seters a los fragmentos
+        //Añadimos los seters a los fragmentos y al firebase
         loginFragment.setListener(mainActivityEvents);
         registerFragment.setListener(mainActivityEvents);
         DataHolder.instance.fireBaseAdmin.setListener(mainActivityEvents);
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         transition.commit();
     }
 }
-//MainActivityEvents implementa los listeners de los fragmentos
+//MainActivityEvents implementa los listeners de los fragmentos y metodos de firebase
 class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListener, FireBaseAdminListener{
     MainActivity mainActivity;
 
@@ -68,14 +70,27 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
         transition.hide(mainActivity.registerFragment);
         transition.commit();
     }
-
+    //metodo que si el registro se hace correctamente pasa a la actividad 2
     @Override
-    public void FireBaseAdmin_RegisterOk(Boolean ok) {
-
+    public void RegisterOk(Boolean ok) {
+        if(ok){
+            Intent intent = new Intent(mainActivity,Second.class);
+            mainActivity.startActivity(intent);
+            mainActivity.finish();
+        }
+    }
+    //metodo que si el login se hace correctamente pasa a la actividad 2
+    @Override
+    public void LoginOk(Boolean ok) {
+        if(ok){
+            Intent intent = new Intent(mainActivity,Second.class);
+            mainActivity.startActivity(intent);
+            mainActivity.finish();
+        }
     }
 
     @Override
-    public void FireBaseAdmin_LoginOk(Boolean ok) {
+    public void Rama(String rama, DataSnapshot dataSnapshot) {
 
     }
 }
