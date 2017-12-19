@@ -50,10 +50,10 @@ public class FireBaseAdmin {
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
                             user = FirebaseAuth.getInstance().getCurrentUser();
-                            listener.RegisterOk(true);
+                            listener.FireBaseAdmin_RegisterOk(true);
                         }
                         else{
-                            listener.RegisterOk(false);
+                            listener.FireBaseAdmin_RegisterOk(false);
                         }
 
                         // ...
@@ -73,10 +73,10 @@ public class FireBaseAdmin {
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
                             user = FirebaseAuth.getInstance().getCurrentUser();
-                            listener.LoginOk(true);
+                            listener.FireBaseAdmin_LoginOk(true);
                         }
                         else{
-                            listener.LoginOk(false);
+                            listener.FireBaseAdmin_LoginOk(false);
                         }
 
                         // ...

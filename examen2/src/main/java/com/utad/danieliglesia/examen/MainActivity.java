@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         //Añadimos los seters a los fragmentos
         loginFragment.setListener(mainActivityEvents);
         registerFragment.setListener(mainActivityEvents);
+        DataHolder.instance.fireBaseAdmin.setListener(mainActivityEvents);
 
         //Creamos las transiciones para que aparezca primero el login
         FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 //MainActivityEvents implementa los listeners de los fragmentos
-class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListener{
+class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListener, FireBaseAdminListener{
     MainActivity mainActivity;
 
     public MainActivityEvents(MainActivity mainActivity){
@@ -66,5 +67,15 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
         transition.show(mainActivity.loginFragment);
         transition.hide(mainActivity.registerFragment);
         transition.commit();
+    }
+
+    @Override
+    public void FireBaseAdmin_RegisterOk(Boolean ok) {
+
+    }
+
+    @Override
+    public void FireBaseAdmin_LoginOk(Boolean ok) {
+
     }
 }

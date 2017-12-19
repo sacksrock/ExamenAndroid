@@ -6,7 +6,7 @@ package com.utad.danieliglesia.examen;
 
 public interface FireBaseAdminListener {
     //metodo del registerOk
-    public void RegisterOk(Boolean ok);
+    public void FireBaseAdmin_RegisterOk(Boolean ok);
     //metodo del loginOk
-    public void LoginOk(Boolean ok);
+    public void FireBaseAdmin_LoginOk(Boolean ok);
 }

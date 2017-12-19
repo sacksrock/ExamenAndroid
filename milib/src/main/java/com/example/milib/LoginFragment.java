@@ -28,6 +28,7 @@ public class LoginFragment extends Fragment {
     }
 
     public void setListener(LoginFragmentListener listener){
+
         this.listener = listener;
     }
 
